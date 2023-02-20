@@ -13,6 +13,7 @@ def main():
         print("1-Distribuição da doença por genero")
         print("2-Distribuição da doença por escalão")
         print("3-Distribuição da doença por colestrol")
+        print("4-Distribuição da doença por genero em gráfico")
         print("0-Sair")
         choice = input("Escolha uma opção: ")
         if(choice == "1"):
@@ -21,6 +22,8 @@ def main():
             tabela.exc2()
         elif(choice == "3"):
             tabela.exc3()
+        elif (choice == "4"):
+            tabela.exc1Graph()
         else:
             print("Escolha uma opção válida")
 

@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 class Cache:
     tabela = []
 
@@ -66,3 +67,26 @@ class Cache:
         for ele in sorted(chaves):
             print("|[" + str(ele * 10) + "-" + str(10 * ele + 10) + "]| " + str(round(((distribuicoes[ele] / soma) * 100),2)) + "%                              |")
         print("-----------------------------------------------")
+
+    def exc1Graph(self):
+        homens = 0
+        muheres = 0
+        for pessoa in self.tabela:
+            if pessoa[1] == "M" and pessoa[5] == "1":
+                homens += 1
+            elif pessoa[1] == "F" and pessoa[5] == "1":
+                muheres += 1
+        data = {'Homens': homens/(homens+muheres) * 100, 'Mulheres': muheres/(homens+muheres) * 100}
+        courses = list(data.keys())
+        values = list(data.values())
+
+        fig = plt.figure(figsize=(5, 5))
+
+
+        plt.bar(courses, values, color='maroon',
+                width=0.2)
+
+        plt.xlabel("Géneros")
+        plt.ylabel("Percentagem (%)")
+        plt.title("Distribuição da doença por genero")
+        plt.show()
