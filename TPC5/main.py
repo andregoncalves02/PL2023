@@ -24,10 +24,13 @@ class Programa:
 
     def run(self):
         expMoedas = r'MOEDA (?:(\d+[c|e]),* *)+'
+        expTelefone = r'T=(\d{9})'
         erMoedas = re.compile(expMoedas)
+        erTelefone = re.compile(expTelefone)
         for input in sys.stdin:
             input = input.strip()
             matchMoedas = erMoedas.fullmatch(input)
+            matchTel = erTelefone.fullmatch(input)
             if input == "LEVANTAR":
                 self.estado = "levantar"
                 print("maq: Introduza Moedas")
@@ -41,7 +44,13 @@ class Programa:
                 self.calculaSaldo()
                 respostaF = "maq: " + resposta + " O saldo total e: " + str(self.saldo)
                 print(respostaF)
-                estado = "Telefonar"
+                self.estado = "Telefonar"
+            elif self.estado == "Telefonar" and matchTel:
+                num = erTelefone.search(input).group(1)
+                if re.match(r'601(\d{6})', num) or re.match(r'641(\d{6})', num):
+                    print("maq: Esse número não é permitido neste telefone. Queira discar novo número!")
+                elif re.match(r'2(\d{8})'):
+                    
 
 
             else:
